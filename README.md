@@ -33,4 +33,4 @@ None of the training metrics were predictive of **score**; R's *step* function c
 |LogisticRegressionCV       |     NA|   0.7830|  7.4954| 0.5794| 0.2938|
 
 
-The work is available on [GitHub](http://www.github.com/grfiv)
+The work is available on [GitHub](https://github.com/grfiv/predict-blood-donations)
