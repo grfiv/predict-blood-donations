@@ -1,41 +1,70 @@
 # DrivenData's *Predict Blood Donations*
 
-Feature engineering did not improve scores in most cases. Scaling was used for those algorithms that called for it. Hyper-parameters were estimated by *GridSearchCV*, a brute-force stratified 10-fold cross-validated search of parameters. Camel-case model names refer to built-in scikit-learn models; lower-case were hand-crafted.
+Feature engineering did not improve scores in most cases. Scaling was used for those algorithms that called for it. Hyper-parameters were estimated by *GridSearchCV*, a brute-force stratified 10-fold cross-validated search of parameters.
 
-* **score** is the leaderboard score for the test-set predictions
-    * **accuracy** is the proportion of the training set correctly predicted
-    * **logloss** is the *sklearn.metrics.log_loss* on the training set   
-      (the contest-specified formula produced identical results)  
-    * **AUC** is the area under the ROC curve
-    * **f1**  is the weighted average of precision and recall
+**leaderboard_score** is the contest score for predictions of the the unknown test-set; lower is better. Camel-case model names refer to built-in scikit-learn models; lower-case were hand-crafted.
 
-None of the training metrics were predictive of **score**; R's *step* function chose **logloss** but with p>0.15 and  Adjusted R^2 of 0.09271.
+|model                      | leaderboard_score|
+|:--------------------------|:-----------------:|
+|LogisticRegression         |            0.4411|
+|GradientBoostingClassifier |            0.4452|
+|LogisticRegressionCV       |            0.4457|
+|nolearn                    |            0.4566|
+|ExtraTreesClassifier       |            0.4729|
+|XGBClassifier              |            0.4851|
+|BaggingClassifier          |            0.4885|
+|ensemble of averages       |            0.4896|
+|SVC                        |            0.5336|
+|SGDClassifier              |            0.5670|
+|cosine_similarity          |            0.5732|
+|KMeans                     |            0.6289|
+|AdaBoostClassifier         |            0.6642|
+|KNeighborsClassifier       |            1.1870|
+|RandomForestClassifier     |            1.7907|
+|voting_ensemble_hard       |                NA|
+|voting_ensemble_soft       |                NA|
+|bagged_gbc                 |                NA|
+|boosted_svc                |                NA|
+|bagged_nolearn             |                NA|
+|bagged_logit               |                NA|
+|boosted_logit              |                NA|
 
+*
+A number of statistics were recorded for each model using 10-fold CV predictions of the training data:
+  * **accuracy**  the proportion of the training set folds correctly predicted
+  * **logloss**  the *sklearn.metrics.log_loss* on the training set predictions
+    (the contest-specified formula produced identical results)  
+  * **AUC**  the area under the ROC curve
+  * **f1**   the weighted average of precision and recall
+  * **mu** the average over 100 cross-validated scores with permutations
+  * **std** the stdev over 100 cross-validated scores with permutations
 
+R's *step* function produced the following
+```
+Call:
+lm(formula = leaderboard_score ~ accuracy + logloss + AUC + mu +
+    std, data = score_data, na.action = na.omit)
 
+Residuals:
+      Min        1Q    Median        3Q       Max
+-0.246576 -0.066364 -0.004653  0.067846  0.271408
 
-|model                      |  score| accuracy| logloss|    AUC|     f1|
-|:--------------------------|------:|--------:|-------:|------:|------:|
-|LogisticRegression         | 0.4411|   0.7760|  7.7353| 0.5649| 0.2543|
-|GradientBoostingClassifier | 0.4452|   0.8177|  6.2962| 0.6717| 0.5070|
-|LogisticRegressionCV       | 0.4457|   0.7830|  7.4954| 0.5794| 0.2938|
-|nolearn                    | 0.4566|   0.8056|  6.7159| 0.6711| 0.5044|
-|ExtraTreesClassifier       | 0.4729|   0.8402|  5.5467| 0.7100| 0.5806|
-|XGBClassifier              | 0.4851|   0.8420|  5.4567| 0.7100| 0.5806|
-|BaggingClassifier          | 0.4885|   0.8507|  5.1568| 0.7107| 0.5865|
-|ensemble of averages       | 0.4896|       NA|      NA|     NA|     NA|
-|SVC                        | 0.5336|   0.9375|  2.1587| 0.8745| 0.8525|
-|SGDClassifier              | 0.5670|   0.7500|  8.6348| 0.6545| 0.4745|
-|cosine_similarity          | 0.5732|   0.7906|  7.2333| 0.6452| 0.4595|
-|KMeans                     | 0.6289|   0.7326|  9.2324| 0.5636| 0.3000|
-|AdaBoostClassifier         | 0.6642|   0.8090|  6.5960| 0.6635| 0.4907|
-|KNeighborsClassifier       | 1.1870|   0.8142|  6.4161| 0.6620| 0.4880|
-|RandomForestClassifier     | 1.7907|   0.9184|  2.8183| 0.8520| 0.8097|
-|voting_ensemble_hard       |     NA|   0.8177|  6.2962| 0.6618| 0.4878|
-|voting_ensemble_soft       |     NA|   0.8177|  6.2962| 0.6618| 0.4878|
-|bagged_gbc                 |     NA|   0.8108|  6.5360| 0.6572| 0.4785|
-|boosted_svc                |     NA|   0.7813|  7.5554| 0.5435| 0.1600|
-|bagged_nolearn             |     NA|   0.7986|  6.9558| 0.6467| 0.4579|
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)  
+(Intercept) -7454.1877  3419.8922  -2.180   0.0721 .
+accuracy     7439.8570  3422.1310   2.174   0.0727 .
+logloss       216.3608    98.9711   2.186   0.0715 .
+AUC             9.1473     3.3393   2.739   0.0338 *
+mu              2.9374     0.8905   3.298   0.0164 *
+std           -11.4574     5.0678  -2.261   0.0645 .
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1975 on 6 degrees of freedom
+  (10 observations deleted due to missingness)
+Multiple R-squared:  0.8708,	Adjusted R-squared:  0.7632
+F-statistic:  8.09 on 5 and 6 DF,  p-value: 0.01214
+```
 
 The work is available on [GitHub](https://github.com/grfiv/predict-blood-donations)
 
