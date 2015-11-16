@@ -4,8 +4,8 @@ Feature engineering did not improve scores in most cases. Scaling was used for t
 
 * **score** is the leaderboard score for the test-set predictions
     * **accuracy** is the proportion of the training set correctly predicted
-    * **logloss** is the *sklearn.metrics.log_loss* on the training set;
-      the contest-specified formula produced identical results.  
+    * **logloss** is the *sklearn.metrics.log_loss* on the training set   
+      (the contest-specified formula produced identical results)  
     * **AUC** is the area under the ROC curve
     * **f1**  is the weighted average of precision and recall
 
