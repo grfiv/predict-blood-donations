@@ -15,7 +15,7 @@ None of the training metrics were predictive of **score**; R's *step* function c
 
 
 |model                      |  score| accuracy| logloss|    AUC|     f1|
-|:--------------------------|:------:|--------:|-------:|------:|------:|
+|:--------------------------|------:|--------:|-------:|------:|------:|
 |LogisticRegression         | 0.4411|   0.7760|  7.7353| 0.5649| 0.2543|
 |GradientBoostingClassifier | 0.4452|   0.8177|  6.2962| 0.6717| 0.5070|
 |LogisticRegressionCV       | 0.4457|   0.7830|  7.4954| 0.5794| 0.2938|
@@ -35,6 +35,8 @@ None of the training metrics were predictive of **score**; R's *step* function c
 |voting_ensemble_soft       |     NA|   0.8177|  6.2962| 0.6618| 0.4878|
 |bagged_gbc                 |     NA|   0.8108|  6.5360| 0.6572| 0.4785|
 |boosted_svc                |     NA|   0.7813|  7.5554| 0.5435| 0.1600|
+|bagged_nolearn             |     NA|   0.7986|  6.9558| 0.6467| 0.4579|
+
 The work is available on [GitHub](https://github.com/grfiv/predict-blood-donations)
 
 Dataset derived from [Blood Transfusion Service Center Data Set](https://archive.ics.uci.edu/ml/datasets/Blood+Transfusion+Service+Center)
