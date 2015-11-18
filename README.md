@@ -31,7 +31,9 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 |boosted_svc                |                NA|
 |scikit_nn                  |                NA|
 
-------------------------------   
+It seems somewhat ironic that in these days of deep-learning's revival that simple logistic regression does so well.   
+
+------------------------------
 
 A number of statistics were recorded for each model from 10-fold CV predictions of the training data:
 
