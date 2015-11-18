@@ -32,13 +32,18 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 |scikit_nn                  |                NA|
 
 
-A number of statistics were recorded for each model from 10-fold CV predictions of the training data:   
+A number of statistics were recorded for each model from 10-fold CV predictions of the training data:
   * **accuracy**  the proportion correctly predicted
+
   * **logloss**  the *sklearn.metrics.log_loss*
+
   * **AUC**  the area under the ROC curve
+
   * **f1**   the weighted average of precision and recall
+
   * **mu** the average over 100 cross-validated scores with permutations
-  * **std** the stdev over 100 cross-validated scores with permutations
+
+  * **std** the stdev over 100 cross-validated scores with permutations   
 
 Starting with all the variables, R's *step* function produced the following
 ```
