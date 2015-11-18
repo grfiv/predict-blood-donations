@@ -32,9 +32,9 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 |scikit_nn                  |                NA|
 
 
-A number of statistics were recorded for each model from 10-fold CV predictions of the training data:
+A number of statistics were recorded for each model from 10-fold CV predictions of the training data:   
   * **accuracy**  the proportion correctly predicted
-  * **logloss**  the *sklearn.metrics.log_loss*  
+  * **logloss**  the *sklearn.metrics.log_loss*
   * **AUC**  the area under the ROC curve
   * **f1**   the weighted average of precision and recall
   * **mu** the average over 100 cross-validated scores with permutations
@@ -64,7 +64,7 @@ Multiple R-squared:  0.8211,	Adjusted R-squared:  0.7936
 F-statistic: 29.84 on 2 and 13 DF,  p-value: 1.386e-05
 ```
 
-The work is available on [GitHub](https://github.com/grfiv/predict-blood-donations)
+The work is available on [GitHub](https://github.com/grfiv/predict-blood-donations) and [BitBucket](https://bitbucket.org/grfiv/predict-blood-donations/)
 
 Dataset derived from [Blood Transfusion Service Center Data Set](https://archive.ics.uci.edu/ml/datasets/Blood+Transfusion+Service+Center)
 
