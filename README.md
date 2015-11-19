@@ -57,23 +57,23 @@ lm(formula = leaderboard_score ~ accuracy + logloss + f1 + mu +
 
 Residuals:
      Min       1Q   Median       3Q      Max
--0.19483 -0.07857 -0.01207  0.03450  0.36601
+-0.19380 -0.07567 -0.01766  0.04934  0.35870
 
 Coefficients:
-             Estimate Std. Error t value Pr(>|t|)  
-(Intercept) -2707.589   2152.885  -1.258   0.2346  
-accuracy     2716.710   2148.005   1.265   0.2321  
-logloss        79.103     62.286   1.270   0.2303  
-f1              1.702      1.036   1.643   0.1287  
-mu            -16.433     10.135  -1.621   0.1332  
-std           -39.776     13.952  -2.851   0.0158 *
+              Estimate Std. Error t value Pr(>|t|)  
+(Intercept) -3244.0494  2213.1761  -1.466   0.1707  
+accuracy     3252.3528  2208.4147   1.473   0.1689  
+logloss        94.6258    64.0312   1.478   0.1675  
+f1              1.7265     0.9765   1.768   0.1047  
+mu            -15.5120     9.5430  -1.625   0.1323  
+std           -38.1748    13.4085  -2.847   0.0159 *
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.1508 on 11 degrees of freedom
+Residual standard error: 0.147 on 11 degrees of freedom
   (7 observations deleted due to missingness)
-Multiple R-squared:  0.8742,	Adjusted R-squared:  0.8171
-F-statistic: 15.29 on 5 and 11 DF,  p-value: 0.0001241
+Multiple R-squared:  0.8805,	Adjusted R-squared:  0.8262
+F-statistic: 16.21 on 5 and 11 DF,  p-value: 9.453e-05
 ```
 Possibly **std** is a stand-in for statistical-learning's **variance**.
 
