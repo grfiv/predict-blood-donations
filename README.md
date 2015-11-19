@@ -19,19 +19,19 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 |XGBClassifier              |            0.4851|
 |BaggingClassifier          |            0.4885|
 |ensemble of averages       |            0.4896|
+|scikit_nn                  |            0.5020|
 |SVC                        |            0.5336|
 |SGDClassifier              |            0.5670|
 |cosine_similarity          |            0.5732|
+|boosted_logit              |            0.5891|
 |KMeans                     |            0.6289|
 |AdaBoostClassifier         |            0.6642|
-|boosted_logit              |            0.6891|
 |KNeighborsClassifier       |            1.1870|
 |RandomForestClassifier     |            1.7907|
 |voting_ensemble_hard       |                NA|
 |boosted_svc                |                NA|
-|scikit_nn                  |                NA|
 
-It seems somewhat ironic that in these days of deep-learning's revival that simple logistic regression does so well.   
+It seems ironic that that simple logistic regression did so well and odd that neither bagging nor boosting improved its performance.
 
 ------------------------------
 
@@ -52,27 +52,30 @@ A number of statistics were recorded for each model from 10-fold CV predictions 
 Starting with all the variables, R's *step* function produced the following
 ```
 Call:
-lm(formula = leaderboard_score ~ mu + std, data = score_data,
-    na.action = na.omit)
+lm(formula = leaderboard_score ~ accuracy + logloss + f1 + mu +
+    std, data = score_data, na.action = na.omit)
 
 Residuals:
      Min       1Q   Median       3Q      Max
--0.19593 -0.05939 -0.04488  0.00603  0.42108
+-0.19483 -0.07857 -0.01207  0.03450  0.36601
 
 Coefficients:
-            Estimate Std. Error t value Pr(>|t|)
-(Intercept)   25.602      3.271   7.827 2.84e-06 ***
-mu           -32.920      4.306  -7.645 3.66e-06 ***
-std          -60.331      8.667  -6.961 9.90e-06 ***
+             Estimate Std. Error t value Pr(>|t|)  
+(Intercept) -2707.589   2152.885  -1.258   0.2346  
+accuracy     2716.710   2148.005   1.265   0.2321  
+logloss        79.103     62.286   1.270   0.2303  
+f1              1.702      1.036   1.643   0.1287  
+mu            -16.433     10.135  -1.621   0.1332  
+std           -39.776     13.952  -2.851   0.0158 *
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.165 on 13 degrees of freedom
-  (8 observations deleted due to missingness)
-Multiple R-squared:  0.8211,	Adjusted R-squared:  0.7936
-F-statistic: 29.84 on 2 and 13 DF,  p-value: 1.386e-05
+Residual standard error: 0.1508 on 11 degrees of freedom
+  (7 observations deleted due to missingness)
+Multiple R-squared:  0.8742,	Adjusted R-squared:  0.8171
+F-statistic: 15.29 on 5 and 11 DF,  p-value: 0.0001241
 ```
-Possibly **mu** and **std** are stand-ins for **bias** and **variance**.
+Possibly **std** is a stand-in for statistical-learning's **variance**.
 
 --------------------------
 
