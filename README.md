@@ -31,7 +31,7 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 |voting_ensemble_hard       |                NA|
 |boosted_svc                |                NA|
 
-It seems ironic that that simple logistic regression did so well and odd that neither bagging nor boosting improved its performance.
+It seems ironic that simple logistic regression did so well and odd that neither bagging nor boosting improved its performance.
 
 ------------------------------
 
