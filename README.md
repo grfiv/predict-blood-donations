@@ -2,10 +2,10 @@
 
 Feature engineering did not improve scores in most cases. Scaling was used for  algorithms that required it. Hyper-parameters were estimated by *GridSearchCV*, a brute-force stratified 10-fold cross-validated search.
 
-**leaderboard_score** is the contest score for predictions of the the unknown test-set; lower is better. Camel-case model names refer to scikit-learn models; lower-case were hand-crafted in some way.
+**leaderboard_score** is the contest score for predictions of the unknown test-set; lower is better. Camel-case model names refer to scikit-learn models; lower-case were hand-crafted in some way.
 
 |model                      | leaderboard_score|
-|:--------------------------|:-----------------:|
+|:--------------------------|:-----------------:| 
 |bagged_nolearn             |            0.4313|
 |LogisticRegression         |            0.4411|
 |voting_ensemble_soft       |            0.4415|
@@ -16,10 +16,12 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 |bagged_gbc                 |            0.4527|
 |nolearn                    |            0.4566|
 |ExtraTreesClassifier       |            0.4729|
+|ensemble of averages       |            0.4808|
+|blending_ensemble          |            0.4834|
 |XGBClassifier              |            0.4851|
 |BaggingClassifier          |            0.4885|
-|ensemble of averages       |            0.4896|
 |scikit_nn                  |            0.5020|
+|boosted_svc                |            0.5334|
 |SVC                        |            0.5336|
 |SGDClassifier              |            0.5670|
 |cosine_similarity          |            0.5732|
@@ -29,9 +31,10 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 |KNeighborsClassifier       |            1.1870|
 |RandomForestClassifier     |            1.7907|
 |voting_ensemble_hard       |                NA|
-|boosted_svc                |                NA|
+|voting_ensemble_hardWgtd   |                NA|
+|voting_ensemble_softWgtd   |                NA|
 
-It seems ironic that simple logistic regression did so well and odd that neither bagging nor boosting improved its performance.
+It seems ironic that simple logistic regression did so well and odd that neither bagging nor boosting improved its performance. In general though, the value of ensembling seems clear.
 
 ------------------------------
 
@@ -57,29 +60,29 @@ lm(formula = leaderboard_score ~ accuracy + logloss + f1 + mu +
 
 Residuals:
      Min       1Q   Median       3Q      Max
--0.19380 -0.07567 -0.01766  0.04934  0.35870
+-0.17667 -0.07695 -0.00910  0.07141  0.36158
 
 Coefficients:
-              Estimate Std. Error t value Pr(>|t|)  
-(Intercept) -3244.0494  2213.1761  -1.466   0.1707  
-accuracy     3252.3528  2208.4147   1.473   0.1689  
-logloss        94.6258    64.0312   1.478   0.1675  
-f1              1.7265     0.9765   1.768   0.1047  
-mu            -15.5120     9.5430  -1.625   0.1323  
-std           -38.1748    13.4085  -2.847   0.0159 *
+              Estimate Std. Error t value Pr(>|t|)
+(Intercept) -3426.4417  2222.8762  -1.541   0.1492
+accuracy     3438.4547  2217.8002   1.550   0.1470
+logloss        99.8884    64.3129   1.553   0.1463
+f1              1.0221     0.7344   1.392   0.1892
+mu            -18.8100     9.1113  -2.064   0.0613 .
+std           -41.5887    13.1287  -3.168   0.0081 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.147 on 11 degrees of freedom
-  (7 observations deleted due to missingness)
-Multiple R-squared:  0.8805,	Adjusted R-squared:  0.8262
-F-statistic: 16.21 on 5 and 11 DF,  p-value: 9.453e-05
+Residual standard error: 0.1481 on 12 degrees of freedom
+  (9 observations deleted due to missingness)
+Multiple R-squared:  0.8681,	Adjusted R-squared:  0.8132
+F-statistic:  15.8 on 5 and 12 DF,  p-value: 6.445e-05
 ```
 Possibly **std** is a stand-in for statistical-learning's **variance**.
 
 --------------------------
 
-The work is available on [GitHub](https://github.com/grfiv/predict-blood-donations) and [BitBucket](https://bitbucket.org/grfiv/predict-blood-donations/)
+The work is available on [GitHub](https://github.com/grfiv/predict-blood-donations) and [BitBucket](https://bitbucket.org/grfiv/predict-blood-donations/). (Only GitHub permits the viewing of IPython notebooks).
 
 Dataset derived from [Blood Transfusion Service Center Data Set](https://archive.ics.uci.edu/ml/datasets/Blood+Transfusion+Service+Center)
 
