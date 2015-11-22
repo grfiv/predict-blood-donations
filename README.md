@@ -52,28 +52,25 @@ A number of statistics were recorded for each model from 10-fold CV predictions 
 Starting with all the variables, R's *step* function produced the following
 ```
 Call:
-lm(formula = leaderboard_score ~ accuracy + logloss + f1 + mu +
-    std, data = score_data, na.action = na.omit)
+lm(formula = leaderboard_score ~ mu + std, data = score_data,
+    na.action = na.omit)
 
 Residuals:
      Min       1Q   Median       3Q      Max
--0.17667 -0.07695 -0.00910  0.07141  0.36158
+-0.18728 -0.05472 -0.03539  0.02082  0.42898
 
 Coefficients:
-              Estimate Std. Error t value Pr(>|t|)
-(Intercept) -3426.4417  2222.8762  -1.541   0.1492
-accuracy     3438.4547  2217.8002   1.550   0.1470
-logloss        99.8884    64.3129   1.553   0.1463
-f1              1.0221     0.7344   1.392   0.1892
-mu            -18.8100     9.1113  -2.064   0.0613 .
-std           -41.5887    13.1287  -3.168   0.0081 **
+            Estimate Std. Error t value Pr(>|t|)
+(Intercept)   25.722      2.962   8.685 3.09e-07 ***
+mu           -33.089      3.897  -8.490 4.11e-07 ***
+std          -60.589      7.857  -7.711 1.35e-06 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.1481 on 12 degrees of freedom
-  (9 observations deleted due to missingness)
-Multiple R-squared:  0.8681,	Adjusted R-squared:  0.8132
-F-statistic:  15.8 on 5 and 12 DF,  p-value: 6.445e-05
+Residual standard error: 0.1499 on 15 degrees of freedom
+  (8 observations deleted due to missingness)
+Multiple R-squared:  0.8311,	Adjusted R-squared:  0.8086
+F-statistic: 36.91 on 2 and 15 DF,  p-value: 1.61e-06
 ```
 Possibly **std** is a stand-in for statistical-learning's **variance**.
 
