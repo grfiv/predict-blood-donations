@@ -5,10 +5,11 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 **leaderboard_score** is the contest score for predictions of the unknown test-set; lower is better. Camel-case model names refer to scikit-learn models; lower-case were hand-crafted in some way.
 
 |model                      | leaderboard_score|
-|:--------------------------|:-----------------:| 
+|:--------------------------|:-----------------:|
 |bagged_nolearn             |            0.4313|
+|ensemble of averages       |            0.4370|
+|voting ensemble            |            0.4396|
 |LogisticRegression         |            0.4411|
-|voting_ensemble_soft       |            0.4415|
 |bagged_logit               |            0.4442|
 |GradientBoostingClassifier |            0.4452|
 |LogisticRegressionCV       |            0.4457|
@@ -16,8 +17,7 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 |bagged_gbc                 |            0.4527|
 |nolearn                    |            0.4566|
 |ExtraTreesClassifier       |            0.4729|
-|ensemble of averages       |            0.4808|
-|blending_ensemble          |            0.4834|
+|blending ensemble          |            0.4834|
 |XGBClassifier              |            0.4851|
 |BaggingClassifier          |            0.4885|
 |scikit_nn                  |            0.5020|
@@ -30,11 +30,8 @@ Feature engineering did not improve scores in most cases. Scaling was used for  
 |AdaBoostClassifier         |            0.6642|
 |KNeighborsClassifier       |            1.1870|
 |RandomForestClassifier     |            1.7907|
-|voting_ensemble_hard       |                NA|
-|voting_ensemble_hardWgtd   |                NA|
-|voting_ensemble_softWgtd   |                NA|
 
-It seems ironic that simple logistic regression did so well and odd that neither bagging nor boosting improved its performance. In general though, the value of ensembling seems clear.
+Simple logistic regression did quite well; it seems odd that bagging and boosting both reduced its performance. In general though, ensembling did improve performances.
 
 ------------------------------
 
